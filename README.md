@@ -1,88 +1,138 @@
 # DDR Controller Verification Environment
 
-This project implements a simplified SystemVerilog verification environment for a DDR-style memory controller.
+A simplified SystemVerilog verification environment built to validate the functionality of a DDR-style memory controller.
 
-The environment verifies memory read/write operations using a structured testbench composed of a generator, driver, monitor, and scoreboard.
+The project demonstrates a structured verification flow using **Generator → Driver → Monitor → Scoreboard**, enabling automated checking of read/write memory transactions.
+
+---
+
+## Project Objective
+
+The goal of this project is to demonstrate how a verification environment can systematically validate memory controller functionality by:
+
+- generating stimulus
+- driving DUT inputs
+- observing DUT behavior
+- checking correctness automatically
+
+This mirrors the basic structure used in real hardware verification flows.
 
 ---
 
 ## Verification Architecture
+# DDR Controller Verification Environment
 
+A simplified SystemVerilog verification environment built to validate the functionality of a DDR-style memory controller.
+
+The project demonstrates a structured verification flow using **Generator → Driver → Monitor → Scoreboard**, enabling automated checking of read/write memory transactions.
+
+---
+
+## Project Objective
+
+The goal of this project is to demonstrate how a verification environment can systematically validate memory controller functionality by:
+
+- generating stimulus
+- driving DUT inputs
+- observing DUT behavior
+- checking correctness automatically
+
+This mirrors the basic structure used in real hardware verification flows.
+
+---
+
+## Verification Architecture
 Generator → Driver → DUT → Monitor → Scoreboard
 
+
+
 **Generator**
-- Creates directed and randomized memory transactions
+- Produces directed and randomized memory transactions.
 
 **Driver**
-- Drives read/write signals into the DDR controller
+- Applies generated transactions to the DDR controller interface.
 
 **Monitor**
-- Observes DUT transactions
+- Observes DUT signals and records transactions occurring during simulation.
 
 **Scoreboard**
-- Compares observed read data with expected values
+- Compares observed DUT outputs with expected results to determine pass/fail.
 
 ---
 
 ## Tools Used
 
-- SystemVerilog
-- Icarus Verilog
-- GTKWave
-- Ubuntu (WSL)
+| Tool | Purpose |
+|-----|------|
+| SystemVerilog | Design and verification environment |
+| Icarus Verilog | Simulation compiler |
+| GTKWave | Waveform visualization |
+| Ubuntu (WSL) | Development environment |
 
 ---
 
 ## Repository Structure
+
+```text
 ddr-controller-verification/
 ├── docs/
-│ └── waveform.png
+│   └── waveform.png
 ├── rtl/
-│ └── ddr_controller.sv
+│   └── ddr_controller.sv
 ├── tb/
-│ └── tb_ddr_env.sv
+│   └── tb_ddr_env.sv
 ├── .gitignore
 └── README.md
 
 ---
 
-## Simulation
+## Simulation Flow
 
-Compile:
+### Compile
 iverilog -g2012 -Wall -o build/ddr_verif_env.out rtl/ddr_controller.sv tb/tb_ddr_env.sv
 
-
-Run simulation:
-
-
+### Run Simulation
 vvp build/ddr_verif_env.out
 
 
-Open waveform:
-
-
+### Open Waveform
 gtkwave build/ddr_verif_env.vcd
 
 ---
 
-## Verification Results
+## Verification Scenarios
 
-The environment successfully verified:
+The verification environment validates multiple memory behaviors:
 
-- Empty memory read returns `0`
+- Empty memory read returning `0`
 - Directed write/read transaction at address `0x10`
 - Directed write/read transaction at address `0x20`
-- Overwrite behavior at the same address
+- Memory overwrite at the same address
 - Randomized write/read transactions
 
-All verification tests passed.
+All verification tests passed successfully.
 
 ---
 
 ## Simulation Waveform
 
-The waveform below shows read and write transactions captured during simulation.
+Below is a GTKWave snapshot showing memory read/write activity during simulation.
 
 ![DDR Verification Waveform](docs/waveform.png)
 
-Note: Initial `X` values represent unknown signal states during simulation startup before reset and stimulus are applied.
+**Note**
+
+Initial `X` values represent unknown signal states at simulation startup before reset and stimulus are applied. These are expected in digital simulation.
+
+---
+
+## Key Takeaways
+
+This project demonstrates:
+
+- creation of a structured verification environment
+- automated checking using a scoreboard
+- transaction-based testing
+- debugging using waveform analysis
+
+These concepts are foundational for modern hardware verification methodologies.
