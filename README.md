@@ -1,44 +1,4 @@
-# DDR Controller Verification Environment (SystemVerilog)
 
-## Overview
-
-This project implements a **SystemVerilog-based verification environment** for a simplified DDR-style memory controller.  
-The goal of the project is to simulate and verify memory read and write transactions using a structured verification architecture.
-
-The verification environment generates memory transactions, drives them into the DUT, monitors responses, and validates correctness using a scoreboard.
-
-This project demonstrates fundamental **digital verification techniques used in ASIC and FPGA development**.
-
----
-
-## Objectives
-
-- Design a structured **SystemVerilog verification environment**
-- Simulate memory read and write transactions
-- Validate controller behavior using automated checking
-- Practice modular verification architecture used in real chip development
-
----
-
-## Verification Architecture
-
-The verification environment consists of the following components:
-
-### Generator
-Creates stimulus transactions such as memory reads and writes.
-
-### Driver
-Applies generated transactions to the DUT interface.
-
-### Monitor
-Observes DUT signals and captures activity during simulation.
-
-### Scoreboard
-Compares expected results with actual DUT outputs to verify correctness.
-
-This modular architecture follows common verification methodology used in industry environments.
-
----
 
 ## Project Structure
 # DDR Controller Verification Environment (SystemVerilog)
