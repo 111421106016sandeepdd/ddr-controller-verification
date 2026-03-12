@@ -1,138 +1,159 @@
-# DDR Controller Verification Environment
+# DDR Controller Verification Environment (SystemVerilog)
 
-A simplified SystemVerilog verification environment built to validate the functionality of a DDR-style memory controller.
+## Overview
 
-The project demonstrates a structured verification flow using **Generator → Driver → Monitor → Scoreboard**, enabling automated checking of read/write memory transactions.
+This project implements a **SystemVerilog-based verification environment** for a simplified DDR-style memory controller.  
+The goal of the project is to simulate and verify memory read and write transactions using a structured verification architecture.
 
----
+The verification environment generates memory transactions, drives them into the DUT, monitors responses, and validates correctness using a scoreboard.
 
-## Project Objective
-
-The goal of this project is to demonstrate how a verification environment can systematically validate memory controller functionality by:
-
-- generating stimulus
-- driving DUT inputs
-- observing DUT behavior
-- checking correctness automatically
-
-This mirrors the basic structure used in real hardware verification flows.
+This project demonstrates fundamental **digital verification techniques used in ASIC and FPGA development**.
 
 ---
 
-## Verification Architecture
-# DDR Controller Verification Environment
+## Objectives
 
-A simplified SystemVerilog verification environment built to validate the functionality of a DDR-style memory controller.
-
-The project demonstrates a structured verification flow using **Generator → Driver → Monitor → Scoreboard**, enabling automated checking of read/write memory transactions.
-
----
-
-## Project Objective
-
-The goal of this project is to demonstrate how a verification environment can systematically validate memory controller functionality by:
-
-- generating stimulus
-- driving DUT inputs
-- observing DUT behavior
-- checking correctness automatically
-
-This mirrors the basic structure used in real hardware verification flows.
+- Design a structured **SystemVerilog verification environment**
+- Simulate memory read and write transactions
+- Validate controller behavior using automated checking
+- Practice modular verification architecture used in real chip development
 
 ---
 
 ## Verification Architecture
-Generator → Driver → DUT → Monitor → Scoreboard
 
+The verification environment consists of the following components:
 
+### Generator
+Creates stimulus transactions such as memory reads and writes.
 
-**Generator**
-- Produces directed and randomized memory transactions.
+### Driver
+Applies generated transactions to the DUT interface.
 
-**Driver**
-- Applies generated transactions to the DDR controller interface.
+### Monitor
+Observes DUT signals and captures activity during simulation.
 
-**Monitor**
-- Observes DUT signals and records transactions occurring during simulation.
+### Scoreboard
+Compares expected results with actual DUT outputs to verify correctness.
 
-**Scoreboard**
-- Compares observed DUT outputs with expected results to determine pass/fail.
-
----
-
-## Tools Used
-
-| Tool | Purpose |
-|-----|------|
-| SystemVerilog | Design and verification environment |
-| Icarus Verilog | Simulation compiler |
-| GTKWave | Waveform visualization |
-| Ubuntu (WSL) | Development environment |
+This modular architecture follows common verification methodology used in industry environments.
 
 ---
 
-## Repository Structure
+## Project Structure
+# DDR Controller Verification Environment (SystemVerilog)
 
-```text
+## Overview
+
+This project implements a **SystemVerilog-based verification environment** for a simplified DDR-style memory controller.  
+The goal of the project is to simulate and verify memory read and write transactions using a structured verification architecture.
+
+The verification environment generates memory transactions, drives them into the DUT, monitors responses, and validates correctness using a scoreboard.
+
+This project demonstrates fundamental **digital verification techniques used in ASIC and FPGA development**.
+
+---
+
+## Objectives
+
+- Design a structured **SystemVerilog verification environment**
+- Simulate memory read and write transactions
+- Validate controller behavior using automated checking
+- Practice modular verification architecture used in real chip development
+
+---
+
+## Verification Architecture
+
+The verification environment consists of the following components:
+
+### Generator
+Creates stimulus transactions such as memory reads and writes.
+
+### Driver
+Applies generated transactions to the DUT interface.
+
+### Monitor
+Observes DUT signals and captures activity during simulation.
+
+### Scoreboard
+Compares expected results with actual DUT outputs to verify correctness.
+
+This modular architecture follows common verification methodology used in industry environments.
+
+---
+
+## Project Structure
 ddr-controller-verification/
-├── docs/
-│   └── waveform.png
 ├── rtl/
-│   └── ddr_controller.sv
+│ └── ddr_controller.v
 ├── tb/
-│   └── tb_ddr_env.sv
-├── .gitignore
+│ ├── generator.sv
+│ ├── driver.sv
+│ ├── monitor.sv
+│ ├── scoreboard.sv
+│ └── tb_top.sv
+├── docs/
+│ └── waveform.png
 └── README.md
 
----
-
-## Simulation Flow
-
-### Compile
-iverilog -g2012 -Wall -o build/ddr_verif_env.out rtl/ddr_controller.sv tb/tb_ddr_env.sv
-
-### Run Simulation
-vvp build/ddr_verif_env.out
-
-
-### Open Waveform
-gtkwave build/ddr_verif_env.vcd
 
 ---
 
-## Verification Scenarios
+## Simulation Tools
 
-The verification environment validates multiple memory behaviors:
-
-- Empty memory read returning `0`
-- Directed write/read transaction at address `0x10`
-- Directed write/read transaction at address `0x20`
-- Memory overwrite at the same address
-- Randomized write/read transactions
-
-All verification tests passed successfully.
+- **SystemVerilog**
+- **Icarus Verilog**
+- **GTKWave**
+- **Linux development environment**
 
 ---
 
-## Simulation Waveform
+## Verification Flow
 
-Below is a GTKWave snapshot showing memory read/write activity during simulation.
-
-![DDR Verification Waveform](docs/waveform.png)
-
-**Note**
-
-Initial `X` values represent unknown signal states at simulation startup before reset and stimulus are applied. These are expected in digital simulation.
+1. Generator produces read/write transactions
+2. Driver sends transactions to the DUT
+3. Monitor observes DUT behavior
+4. Scoreboard validates results
+5. Waveforms are inspected for functional correctness
 
 ---
 
-## Key Takeaways
+## Example Verification Scenario
 
-This project demonstrates:
+Typical simulation includes:
 
-- creation of a structured verification environment
-- automated checking using a scoreboard
-- transaction-based testing
-- debugging using waveform analysis
+- Write transaction to memory
+- Read transaction from memory
+- Scoreboard comparison of expected vs actual data
+- Waveform inspection using GTKWave
 
-These concepts are foundational for modern hardware verification methodologies.
+---
+
+## Learning Outcomes
+
+Through this project the following verification concepts were practiced:
+
+- Testbench architecture design
+- Transaction generation
+- Driver and monitor implementation
+- Scoreboard-based checking
+- Simulation debugging using waveform analysis
+
+---
+
+## Future Improvements
+
+Possible enhancements to the verification environment include:
+
+- Constrained random stimulus generation
+- Functional coverage collection
+- Error injection testing
+- Migration to a full **UVM-based verification environment**
+
+---
+
+## Author
+
+Sandeep  
+
